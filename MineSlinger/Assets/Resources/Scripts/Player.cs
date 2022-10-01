@@ -26,10 +26,12 @@ public class Player : MonoBehaviour
         }
     }
     private Vector2 lastDirectionWalked;
+    [SerializeField]
     private float minSlidingSpeed = 2f;
 
     private Rigidbody2D rb;
     private Animator anim;
+    private Gun Gun;
 
     void Awake()
     {
@@ -37,16 +39,24 @@ public class Player : MonoBehaviour
         lastDirectionWalked = Vector2.zero;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        Gun = transform.GetChild(0).gameObject.GetComponent<Gun>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        RotateGun();
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Slide();
         }
         Move();
+    }
+
+    public void RotateGun()
+    {
+        Gun.transform.right = -Direction;
+        Gun.FixState(Direction);
     }
 
     public void Move()
