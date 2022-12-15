@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gun : MonoBehaviour
+public class GunHolder : MonoBehaviour
 {
     private SpriteRenderer sr;
+    private Transform muzzle;
+
+    [field:SerializeField]
+    public GameObject BULLET_PREFAB { get; private set; }
 
     void Awake()
     {
@@ -13,13 +17,27 @@ public class Gun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        muzzle = transform.GetChild(0).transform.GetChild(0);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void Shoot(Vector3 mousePos, float speed)
+    {
+        Bullet b = Instantiate(BULLET_PREFAB, 
+                               muzzle.position, 
+                               Quaternion.identity, 
+                               null).GetComponent<Bullet>();
+        var mousePos2d = new Vector2(mousePos.x, mousePos.y);
+        var muzzlePos2d = new Vector2(muzzle.position.x, muzzle.position.y);
+        var mouseAngle = (mousePos2d - muzzlePos2d).normalized;
+        b.Rigidbody.velocity = mouseAngle * speed;
+
+        b.transform.right = mouseAngle;
     }
 
     // Ripped from Yargs Ahoy! legit no idea how this works lol

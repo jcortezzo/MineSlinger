@@ -264,6 +264,7 @@ MonoBehaviour:
   moveSpeed: 5
   slideForce: 15
   slideCd: 0.5
+  shootSpeed: 2
   minSlidingSpeed: 3
 --- !u!95 &30884670
 Animator:
@@ -448,6 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48d227477a82f21458d429c9c1fda088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <BULLET_PREFAB>k__BackingField: {fileID: 5303920088808634374, guid: d7e6999db7a23c0458ed2efc5d963b16, type: 3}
 --- !u!1 &996670122
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,7 +462,7 @@ GameObject:
   m_Layer: 0
   m_Name: Muzzle
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1

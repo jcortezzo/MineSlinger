@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
     private float slideForce;
     [SerializeField]
     private float slideCd;
+    [SerializeField]
+    private float shootSpeed;
 
     public bool CanSlide { get; private set; }
 
@@ -31,7 +33,7 @@ public class Player : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator anim;
-    private Gun Gun;
+    private GunHolder Gun;
 
     void Awake()
     {
@@ -39,7 +41,7 @@ public class Player : MonoBehaviour
         lastDirectionWalked = Vector2.zero;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        Gun = transform.GetChild(0).gameObject.GetComponent<Gun>();
+        Gun = transform.GetChild(0).gameObject.GetComponent<GunHolder>();
     }
 
     // Update is called once per frame
@@ -49,6 +51,11 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Slide();
+        }
+        if (Input.GetMouseButtonDown(0))
+        {
+            var mousePos = CameraController.Camera.ScreenToWorldPoint(Input.mousePosition);
+            Gun.Shoot(mousePos, shootSpeed);
         }
         Move();
     }
